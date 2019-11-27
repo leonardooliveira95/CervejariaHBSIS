@@ -1,0 +1,9 @@
+<app-cabecalho titulo="{{ingrediente.id > 0 ? nomeIngrediente : 'Cadastrar Ingrediente'}}" iconeTitulo="fa-flask"></app-cabecalho>
+<hr />
+<form #ingredienteForm="ngForm" (ngSubmit)="cadastrarIngrediente()" ngNativeValidate>
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" class="form-control" [(ngModel)]="ingrediente.nome" name="nome" required="required" #nome="ngModel" required="required">
+    </div>
+    <button type="submit" class="btn btn-primary" >Gravar</button>
+</form>

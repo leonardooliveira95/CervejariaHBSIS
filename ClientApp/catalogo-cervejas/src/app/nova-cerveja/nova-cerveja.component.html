@@ -1,0 +1,79 @@
+<app-cabecalho titulo="{{cerveja.id > 0 ? nomeCerveja : 'Cadastrar cerveja'}}" iconeTitulo="fa-beer"></app-cabecalho>
+<hr />
+
+<form #cervejaForm="ngForm" (ngSubmit)="onSubmit()" ngNativeValidate>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>Nome</label>
+            <input type="text" class="form-control" [(ngModel)]="cerveja.nome" name="nome" required="required"
+                #nome="ngModel">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Marca</label>
+            <input type="text" class="form-control" [(ngModel)]="cerveja.marca" name="marca" required="required"
+                #marca="ngModel" />
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Família</label>
+            <select class="form-control" [(ngModel)]="cerveja.familia" name="familia" required="required"
+                #familia="ngModel">
+                <option>Ale</option>
+                <option>Lager</option>
+                <option>Lambic</option>
+                <option>Híbrida</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label>Estilo</label>
+            <input type="text" class="form-control" [(ngModel)]="cerveja.estilo" name="estilo" required="required"
+                #estilo="ngModel">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>ABV (Teor alcoólico)</label>
+            <input type="number" class="form-control" [(ngModel)]="cerveja.abv" name="abv" required="required"
+                #abv="ngModel" step="0.1">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>IBU</label>
+            <input type="number" class="form-control" [(ngModel)]="cerveja.ibu" name="ibu" required="required"
+                #ibu="ngModel">
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label>Ingredientes</label>
+        <div class="row align-items-center">
+            <div class="col-md-10">
+                <select class="form-control" [(ngModel)]="ingredienteSelecionado" name="ingredienteSelecionado">
+                    <option *ngFor="let ingrediente of ingredientes" [value]="ingrediente.id">
+                        {{ingrediente.nome}}
+                    </option>
+                </select>
+            </div>
+            <div class="col cursor-pointer" (click)="adicionarIngrediente(ingrediente)">
+                <span class="fas fa-plus"></span>
+            </div>
+
+        </div>
+        <ul class="list-group" id="lista-ingredientes-selecionados">
+            <li *ngFor="let ingrediente of ingredientesSelecionados" class="list-group-item d-flex align-items-center">
+                <span>{{ingrediente.nome}}</span>
+                <span class="fas fa-minus botao-remover-ingrediente  cursor-pointer" title="Remover"
+                    (click)="removerIngrediente(ingrediente)"></span>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Gravar</button>
+</form>

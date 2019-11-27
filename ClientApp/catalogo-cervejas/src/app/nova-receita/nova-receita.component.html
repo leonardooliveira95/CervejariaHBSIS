@@ -1,0 +1,66 @@
+<app-cabecalho titulo="Receita" iconeTitulo="fas fa-clipboard-list"></app-cabecalho>
+<hr />
+
+<form>
+    <div class="form-row">
+        <div class=" form-group col-md-6">
+            <label>Cerveja</label>
+            <select class="form-control" [(ngModel)]="receita.cerveja.id" name="cerveja"  (change)="onChangeCerveja()">
+                <option *ngFor="let cerveja of cervejas" [value]="cerveja.id">
+                    {{cerveja.nome}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Garrafa</label>
+            <select class="form-control" [(ngModel)]="receita.garrafa" name="garrafa">
+                <option>600ml</option>
+                <option>1000ml</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Ingredientes</label>
+            <div class="row  align-items-center">
+                <div class="col-md-10">
+                    <select class="form-control" [(ngModel)]="ingredienteSelecionado" name="ingredienteSelecionado">
+                        <option *ngFor="let ingrediente of ingredientes" [value]="ingrediente.id">
+                            {{ingrediente.nome}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <span class="fas fa-plus cursor-pointer" (click)="adicionarIngrediente()"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <h6>Ingredientes selecionados</h6>
+            <hr />
+            <ul class="list-group" *ngIf="ingredientesSelecionados.length > 0">
+                <li *ngFor="let ings of ingredientesSelecionados; let i = index" class="list-group-item d-flex align-items-center">
+                    <span class="fas fa-flask"></span>
+                    <span>{{ings.ingrediente.nome}}</span>
+                    <div class="container-input-quantidade-ingrediente d-flex align-items-center">
+                        <small>Quantidade</small>
+                        <input type="number" step="0.01" class="form-control input-quantidade-ingrediente" [(ngModel)]="ings.quantidade" name="quantidade-{{i}}"/>
+                        <select class="form-control" [(ngModel)]="ings.unidadeMedida" name="unidadeMedida-{{i}}">
+                            <option>KG</option>
+                            <option>L</option>
+                        </select>
+                    </div>
+                    <span class="fas fa-minus botao-remover-ingrediente  cursor-pointer" title="Remover" (click)="removerIngrediente(ings)"></span>
+                </li>
+            </ul>
+            <div class="alert alert-info" *ngIf="ingredientesSelecionados.length === 0">Nenhum ingrediente selecionado</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="gravarReceita()">Gravar</button>
+        </div>
+    </div>
+</form>

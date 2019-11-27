@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">
+        <img src="../assets/hbsislogo2015.png" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/ingredientes">Ingredientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/cervejas">Cervejas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/receitas">Receitas</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main" class="container">
+
+    <router-outlet></router-outlet>
+
+</main>

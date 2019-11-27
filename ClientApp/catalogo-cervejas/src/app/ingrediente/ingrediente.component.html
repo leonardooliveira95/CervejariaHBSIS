@@ -1,0 +1,13 @@
+<app-cabecalho titulo="Ingredientes" iconeTitulo="fa-flask" linkBotao="/novoIngrediente" textoBotao="Novo"
+    iconeBotao="fa-plus"></app-cabecalho>
+<hr />
+
+<app-loading [loading]="loading"></app-loading>
+
+<ul class="list-group" id="lista-ingredientes">
+    <li class="list-group-item d-flex align-items-center" *ngFor="let ingrediente of ingredientes">
+        <span>{{ingrediente.nome}}</span>
+        <span class="fas fa-edit botao-editar-ingrediente cursor-pointer" title="Editar" routerLink="/editarIngrediente/{{ingrediente.id}}"></span>
+        <span class="fas fa-trash cursor-pointer" title="Remover" (click)="removerIngrediente(ingrediente.id)"></span>
+    </li>
+</ul>

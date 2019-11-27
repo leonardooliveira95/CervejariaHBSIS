@@ -1,0 +1,31 @@
+.container-nome-cerveja {
+	margin-right: 15px;
+}
+
+.botao-calcular-producao {
+	margin-left: auto;
+}
+
+#botao-calcular-todas-receitas {
+	margin-bottom: 10px;
+	display: inline-block;
+}
+
+.titulo-card-receitas {
+	.garrafa-cerveja {
+		margin-left: 10px;
+	}
+}
+
+.container-producao-todas {
+	.card {
+		flex-basis: auto;
+		flex-grow: 0;
+        width: 22%;
+        margin-bottom: 15px;
+	}
+}
+
+.container-valores-totais {
+    margin-bottom: 15px;
+}

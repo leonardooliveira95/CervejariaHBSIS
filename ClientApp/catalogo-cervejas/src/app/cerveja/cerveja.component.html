@@ -1,0 +1,9 @@
+<app-cabecalho titulo="Cervejas" iconeTitulo="fa-beer" linkBotao="/novaCerveja" textoBotao="Nova" iconeBotao="fa-plus"></app-cabecalho>
+<hr />
+<ul class="list-group" id="lista-cervejas">
+    <li class="list-group-item d-flex align-items-center" *ngFor="let cerveja of cervejas">
+        <span>{{cerveja.nome}}</span>
+        <span class="fas fa-edit botao-editar-cerveja cursor-pointer" title="Editar" routerLink="/editarCerveja/{{cerveja.id}}"></span>
+        <span class="fas fa-trash cursor-pointer" title="Remover" (click)="removerCerveja(cerveja.id)"></span>
+    </li>
+</ul>

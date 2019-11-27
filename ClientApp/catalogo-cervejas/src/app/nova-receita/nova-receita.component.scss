@@ -1,0 +1,22 @@
+.container-input-quantidade-ingrediente {
+	width: 30%;
+    margin-left: auto;
+    margin-right: 10px;
+
+	small {
+		margin-right: 10px;
+	}
+
+	input {
+		margin-right: 10px;
+	}
+
+	select {
+		width: 40%;
+	}
+}
+
+.botao-remover-ingrediente{
+    color:red;
+    margin-right: 0;
+}

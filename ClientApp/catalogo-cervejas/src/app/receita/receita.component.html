@@ -1,0 +1,118 @@
+<app-cabecalho titulo="Receitas" iconeTitulo="fas fa-clipboard-list" linkBotao="/novaReceita" textoBotao="Nova"
+    iconeBotao="fa-plus"></app-cabecalho>
+<hr />
+
+<a href="javascript:void(0)" id="botao-calcular-todas-receitas" (click)="abrirModalCalculoTodas(contentTodas)">
+    <span class="fas fa-calculator"></span>
+    <span>Calcular produção diária para todas as receitas</span>
+</a>
+
+<ul class="list-group">
+    <li class="list-group-item d-flex align-items-center" *ngFor="let receita of receitas">
+        <div class="container-nome-cerveja" title="Cerveja">
+            <span class="fas fa-beer"></span>
+            <span>{{ receita.cerveja.nome }}</span>
+        </div>
+        <div title="Garrafa">
+            <span class="fas fa-wine-bottle"></span>
+            <span>{{receita.garrafa}}</span>
+        </div>
+        <a href="javascript:void(0)" class="botao-calcular-producao" (click)="abrirModalCalculo(content, receita)">
+            <span class="fas fa-calculator"></span>
+            <span>Calcular produção diária</span>
+        </a>
+    </li>
+</ul>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Calcular produção diária</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label>Quantidade de garrafas</label>
+                <input type="number" class="form-control" [(ngModel)]="quantidadeGarrafas" name="quantidadeGarrafas"
+                    (input)="calcularProducaoDiariaUnica()" />
+                <small>Digite a quantidade de garrafas a serem produzidas no dia para calcular a quantidade de insumos
+                    necessários</small>
+            </div>
+        </form>
+        <div>
+            Quantidade de insumos necessários:
+            <div>
+                <div *ngFor="let ing of ingredientes">
+                    <span class="fas fa-flask"></span>
+                    <span>{{ing.ingrediente.nome}}: {{ing.quantidadeNecessariaDia}} {{ing.unidadeMedida}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+
+<ng-template #contentTodas let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Calcular produção diária</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label>Quantidade de garrafas</label>
+                <input type="number" class="form-control" [(ngModel)]="quantidadeGarrafasTodas"
+                    name="quantidadeGarrafasTodas" (input)="calcularProducaoDiariaTodas()" />
+                <small>Digite a quantidade de garrafas a serem produzidas no dia para calcular a quantidade de insumos
+                    necessários</small>
+            </div>
+        </form>
+        <div class="container-valores-totais" *ngIf="ingredientesTotais !== undefined">
+            <h6>Valores totais:</h6>
+            <hr />
+            <div *ngFor="let ing of ingredientesTotais">
+                <span class="fas fa-flask"></span>
+                <span>{{ing.ingrediente.nome}}: {{ing.quantidadeNecessariaDia.toFixed(2)}} {{ing.unidadeMedida}}</span>
+            </div>
+        </div>
+        <div *ngIf="quantidadeGarrafasTodas !== undefined">
+            <h6>Valores por receita</h6>
+            <hr />
+            <div class="card-deck container-producao-todas">
+                <div *ngFor="let receita of receitas" class="card">
+                    <div class="card-body">
+                        <h6 class="card-title titulo-card-receitas">
+                            <span class="fas fa-beer nome-cerveja"></span>
+                            <span>{{receita.cerveja.nome}}</span>
+                            <span class="fas fa-wine-bottle garrafa-cerveja"></span>
+                            <span>{{receita.garrafa}}</span>
+                        </h6>
+
+                        <hr />
+
+                        <div>
+                            <div *ngFor="let ing of receita.ingredientes">
+                                <span class="fas fa-flask"></span>
+                                <span>{{ing.ingrediente.nome}}: {{ing.quantidadeNecessariaDia}}
+                                    {{ing.unidadeMedida}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
